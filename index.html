@@ -18,9 +18,58 @@
     
 </head>
 
+<canvas id="bgCanvas"></canvas>
+<script>
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    for (let i = 0; i < 50; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 3 + 1,
+            dx: Math.random() * 2 - 1,
+            dy: Math.random() * 2 - 1
+        });
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    function updateParticles() {
+        particles.forEach(p => {
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        });
+    }
+
+    function animate() {
+        drawParticles();
+        updateParticles();
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+
+
+
 <body>
     <header>
-        <h2>SG</h2>
+        <h2 class="nav-title">Shantanu Gupta</h2>
         <nav>
             <a class="darkerText" href="https://github.com/shantanugupta2004" target="_blank">GitHub</a>
             <a class="darkerText" href="https://www.linkedin.com/in/shantanu-gupta-7988a7257/" target="_blank">LinkedIn</a>
@@ -30,20 +79,8 @@
     </header>
     <main>
         <section>
-
-            <div class="nameContainer">
-
-                <h1>Shantanu Gupta</h1>
-        
-            </div>
           
             <p class="aboutMe">Hi, I'm Shantanu Gupta, a CSE undergrad at IIIT Naya Raipur. I am a tech enthusiast interested in Machine Learning and Web Development.</p>
-            <div>
-                <a href="mailto:shantanugupta0412@gmail.com" class="outreach darkerText">
-                    <i class="fa-solid fa-arrow-right"></i>
-                    <p>Email me</p>
-                </a>
-            </div>
         </section>
         <section class="projectContainer">
             <p class="darkerText headerText">Latest Projects</p>
@@ -96,15 +133,56 @@
                 </div>
             </div>
         </section>
+        <section class="contactContainer">
+            <p class="darkerText headerText">Contact Me</p>
+            <form class="contactForm" id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit" id="submitBtn">Send Message</button>
+            </form>
+        </section>
+        
     </main>
-    <footer>
+    
+    <footer class="footer">
+        <div class="backToTop">
+            <a href="#top" class="backToTopLink">Back to Top</a>
+        </div>
+        <div class="socialLinks">
+            <a href="shantanugupta0412@gmail.com" target="_blank" class="socialLink">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://x.com/shantanu_g2004" target="_blank" class="socialLink">
+                <i class="fa-brands fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/shantanugupta2004?igsh=MXUwc2lvaW5sOGVzbw==" target="_blank" class="socialLink">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
         <p>&copy; 2025 Shantanu Gupta. All rights reserved.</p>
-        <button onclick="scrollToTop()" class="back-to-top">Back to Top ↑</button>
     </footer>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
     <script>
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        emailjs.init("lvO2kkZsvmCBSz9Es");
+
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("service_54cwalh", "template_rbg0bnh", this)
+        .then(function(response) {
+            console.log("SUCCESS!", response);
+            alert("Your message has been sent successfully!");
+        }, function(error) {
+            console.log("FAILED...", error);
+            alert("Oops, something went wrong. Please try again later.");
+        });
+});
+
     </script>
 
 </body>
