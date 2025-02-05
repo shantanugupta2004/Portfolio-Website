@@ -106,23 +106,6 @@ section {
     gap: 48px;
 }
 
-/* .nameContainer {
-    gap: 8px;
-}
-
-.nameContainer h1 {
-    opacity: 0;
-    transform: translateY(-10px);
-    animation: fadeIn 1s ease-in-out forwards;
-} */
-
-/* @keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-} */
-
 .statsContainer {
     display: flex;
     flex-direction: column;
