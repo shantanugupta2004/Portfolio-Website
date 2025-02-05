@@ -106,6 +106,7 @@ section {
     gap: 48px;
 }
 
+
 .statsContainer {
     display: flex;
     flex-direction: column;
