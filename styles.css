@@ -169,7 +169,8 @@ section {
     transform: rotate(-45deg);
 }
 
-.projectContainer {
+.projectContainer,
+.experienceContainer {
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -179,7 +180,8 @@ section {
     margin-bottom: 24px;
 }
 
-.projectItem {
+.projectItem,
+.experienceItem {
     display: flex;
     align-items: stretch;
     gap: 16px;
@@ -190,7 +192,8 @@ section {
     animation: fadeIn 0.8s ease-out forwards;
 }
 
-.projectItem div:first-child {
+.projectItem div:first-child,
+.experienceItem div:first-child {
     display: flex;
     flex-direction: column;
     gap: 14px;
